@@ -1,6 +1,7 @@
 package particles
 
 import (
+	"math"
 	"time"
 )
 
@@ -34,7 +35,7 @@ type ParticleParams struct {
 type NextPositionFunc func(particle *Particle, deltaMS int64)
 
 // Ascii returns the ascii at the given position
-type Ascii func(x, y int, count [][]int) rune
+type Ascii func(row, col int, count [][]int) rune
 
 // Reset resets the particle to the initial state
 type Reset func(particle *Particle, params *ParticleParams) rune
@@ -76,4 +77,36 @@ func (ps *ParticleSystem) Update() {
 			ps.reset(p, &ps.ParticleParams)
 		}
 	}
+}
+
+// Display returns the ascii representation of the particle system
+func (ps *ParticleSystem) Display() [][]rune {
+	counts := make([][]int, 0)
+
+	// Initialize counts to size of particle system dimensions
+	for row := 0; row < ps.Y; row++ {
+		count := make([]int, 0)
+		for col := 0; col < ps.X; col++ {
+			count = append(count, 0)
+		}
+		counts = append(counts, count)
+	}
+
+	for _, p := range ps.particles {
+		row := int(math.Floor(p.y))
+		col := int(math.Floor(p.x))
+
+		counts[row][col]++
+	}
+
+	out := make([][]rune, 0)
+	for r, row := range counts {
+		outRow := make([]rune, 0)
+		for c := range row {
+			outRow = append(outRow, ps.ascii(r, c, counts))
+		}
+		out = append(out, outRow)
+	}
+
+	return out
 }
