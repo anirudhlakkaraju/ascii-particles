@@ -38,7 +38,7 @@ type NextPositionFunc func(particle *Particle, deltaMS int64)
 type Ascii func(row, col int, count [][]int) rune
 
 // Reset resets the particle to the initial state
-type Reset func(particle *Particle, params *ParticleParams) rune
+type Reset func(particle *Particle, params *ParticleParams)
 
 // ParticleSystem is the system of particles
 type ParticleSystem struct {
