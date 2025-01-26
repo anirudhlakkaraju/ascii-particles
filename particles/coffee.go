@@ -9,8 +9,22 @@ type Coffee struct {
 	ParticleSystem
 }
 
-func ascii(row, col int, counts [][]int) rune {
-	return '}'
+// ascii returns the ASCII representation of the particle
+func ascii(row, col int, counts [][]int) string {
+	count := counts[row][col]
+	if count < 3 {
+		return " "
+	}
+	if count < 6 {
+		return "."
+	}
+	if count < 9 {
+		return ":"
+	}
+	if count < 12 {
+		return "{"
+	}
+	return "}"
 }
 
 // reset particle's lifetime, speed and position
