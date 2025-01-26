@@ -2,6 +2,8 @@ package particles
 
 import (
 	"math"
+	"slices"
+	"strings"
 	"time"
 )
 
@@ -86,7 +88,7 @@ func (ps *ParticleSystem) Update() {
 }
 
 // Display returns the ascii representation of the particle system
-func (ps *ParticleSystem) Display() [][]rune {
+func (ps *ParticleSystem) Display() string {
 	counts := make([][]int, 0)
 
 	// Initialize counts to size of particle system dimensions
@@ -105,14 +107,20 @@ func (ps *ParticleSystem) Display() [][]rune {
 		counts[row][col]++
 	}
 
-	out := make([][]rune, 0)
+	out := make([][]string, 0)
 	for r, row := range counts {
-		outRow := make([]rune, 0)
+		outRow := make([]string, 0)
 		for c := range row {
 			outRow = append(outRow, ps.ascii(r, c, counts))
 		}
 		out = append(out, outRow)
 	}
 
-	return out
+	slices.Reverse(out)
+	outStr := make([]string, 0)
+	for _, row := range out {
+		outStr = append(outStr, strings.Join(row, ""))
+	}
+
+	return strings.Join(outStr, "\n")
 }
