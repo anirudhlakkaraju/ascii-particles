@@ -9,8 +9,20 @@ func ascii(row, col int, counts [][]int) rune {
 }
 
 func NewCoffee(width, height int) Coffee {
-	reset := func(row, col int, counts [][]int) {}
+	return Coffee{
+		ParticleSystem: NewParticleSystem(
+			ParticleParams{
+				MaxLife:       7,
+				MaxSpeed:      0.5,
+				ParticleCount: 100,
 
-	ascii := func(row, col int, counts [][]int) rune {
+				X: width,
+				Y: height,
+
+				reset:        reset,
+				nextPosition: nextPosition,
+				ascii:        ascii,
+			}),
 	}
+
 }
