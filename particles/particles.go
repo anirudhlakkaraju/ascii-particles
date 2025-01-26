@@ -65,7 +65,7 @@ func NewParticleSystem(params ParticleParams) ParticleSystem {
 
 // Start starts the particle system
 func (ps *ParticleSystem) Start() {
-	for _, p := range ps.particles {
+	for _, p := range ps.Particles {
 		ps.reset(p, &ps.ParticleParams)
 	}
 }
@@ -76,7 +76,7 @@ func (ps *ParticleSystem) Update() {
 	delta := now - ps.lastTime
 	ps.lastTime = now
 
-	for _, p := range ps.particles {
+	for _, p := range ps.Particles {
 		ps.nextPosition(p, delta)
 
 		if p.Y >= float64(ps.Y) || p.X >= float64(ps.X) {
@@ -98,7 +98,7 @@ func (ps *ParticleSystem) Display() [][]rune {
 		counts = append(counts, count)
 	}
 
-	for _, p := range ps.particles {
+	for _, p := range ps.Particles {
 		row := int(math.Floor(p.Y))
 		col := int(math.Floor(p.X))
 
