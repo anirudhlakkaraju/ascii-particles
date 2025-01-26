@@ -31,14 +31,19 @@ type ParticleParams struct {
 	reset        Reset
 }
 
+// NextPositionFunc calculates position of particle in next time step
 type NextPositionFunc func(particle *Particle, deltaMS int64)
-type Ascii func(row, col int, count [][]int) rune
+
+// Ascii returns the ASCII representation of the particle
+type Ascii func(row, col int, count [][]int) string
+
+// Reset resets the particle's lifetime, speed and position
 type Reset func(particle *Particle, params *ParticleParams)
 
 // ParticleSystem is the system of particles
 type ParticleSystem struct {
 	ParticleParams
-	particles []*Particle
+	Particles []*Particle
 
 	// last time of update
 	lastTime int64
