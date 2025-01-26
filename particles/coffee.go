@@ -1,3 +1,4 @@
+// Package particles provides a particle system for ASCII art
 package particles
 
 import (
@@ -5,6 +6,7 @@ import (
 	"math/rand"
 )
 
+// Coffee is a particle system for steamin hot coffee
 type Coffee struct {
 	ParticleSystem
 }
