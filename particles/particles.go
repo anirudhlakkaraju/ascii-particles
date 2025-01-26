@@ -51,9 +51,15 @@ type ParticleSystem struct {
 
 // NewParticleSystem creates a new particle system
 func NewParticleSystem(params ParticleParams) ParticleSystem {
+	particles := make([]*Particle, 0)
+	for i := 0; i < int(params.ParticleCount); i++ {
+		particles = append(particles, &Particle{})
+	}
+
 	return ParticleSystem{
 		ParticleParams: params,
 		lastTime:       time.Now().UnixMilli(),
+		Particles:      particles,
 	}
 }
 
