@@ -7,12 +7,12 @@ import (
 
 // Particle is a single particle in the system
 type Particle struct {
-	lifetime int64
-	speed    float64
+	Lifetime int64
+	Speed    float64
 
 	// positions
-	x float64
-	y float64
+	X float64
+	Y float64
 }
 
 // ParticleParams is the parameters for the particle system
@@ -68,7 +68,7 @@ func (ps *ParticleSystem) Update() {
 	for _, p := range ps.particles {
 		ps.nextPosition(p, delta)
 
-		if p.y >= float64(ps.Y) || p.x >= float64(ps.X) {
+		if p.Y >= float64(ps.Y) || p.X >= float64(ps.X) {
 			ps.reset(p, &ps.ParticleParams)
 		}
 	}
@@ -88,8 +88,8 @@ func (ps *ParticleSystem) Display() [][]rune {
 	}
 
 	for _, p := range ps.particles {
-		row := int(math.Floor(p.y))
-		col := int(math.Floor(p.x))
+		row := int(math.Floor(p.Y))
+		col := int(math.Floor(p.X))
 
 		counts[row][col]++
 	}
