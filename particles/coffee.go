@@ -36,7 +36,8 @@ func reset(p *Particle, params *ParticleParams) {
 
 	// translate X coordinate on generation
 	maxX := math.Floor(float64(params.X) / 2)
-	p.X = math.Max(-maxX, math.Min(rand.NormFloat64(), maxX))
+	x := math.Max(-maxX, math.Min(rand.NormFloat64(), maxX))
+	p.X = x + maxX
 	p.Y = 0
 }
 
