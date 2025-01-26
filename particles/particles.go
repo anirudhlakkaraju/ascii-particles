@@ -31,13 +31,8 @@ type ParticleParams struct {
 	reset        Reset
 }
 
-// NextPositionFunc calculates next position of particle
 type NextPositionFunc func(particle *Particle, deltaMS int64)
-
-// Ascii returns the ascii at the given position
 type Ascii func(row, col int, count [][]int) rune
-
-// Reset resets the particle to the initial state
 type Reset func(particle *Particle, params *ParticleParams)
 
 // ParticleSystem is the system of particles
