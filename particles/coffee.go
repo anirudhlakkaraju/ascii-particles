@@ -53,6 +53,12 @@ func nextPosition(p *Particle, deltaMS int64) {
 
 // NewCoffee creates a new coffee system
 func NewCoffee(width, height int) Coffee {
+
+	// force odd system width to help with normal distribution
+	if width%2 == 0 {
+		width++
+	}
+
 	return Coffee{
 		ParticleSystem: NewParticleSystem(
 			ParticleParams{
