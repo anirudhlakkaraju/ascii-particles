@@ -14,8 +14,8 @@ type Coffee struct {
 
 var startTime = time.Now().UnixMilli()
 
-// AsciiSteam represents particle density with steam effect
-func AsciiSteam(row, col int, counts [][]int) string {
+// ASCIISteam represents particle density with steam effect
+func ASCIISteam(row, col int, counts [][]int) string {
 	count := counts[row][col]
 	if count < 1 {
 		return " "
@@ -31,8 +31,8 @@ func AsciiSteam(row, col int, counts [][]int) string {
 	return "."
 }
 
-// AsciiFire represents particle density with fire effect
-func AsciiFire(row, col int, counts [][]int) string {
+// ASCIIFire represents particle density with fire effect
+func ASCIIFire(row, col int, counts [][]int) string {
 	count := counts[row][col]
 	if count == 0 {
 		return " "

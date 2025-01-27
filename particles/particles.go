@@ -30,15 +30,15 @@ type ParticleParams struct {
 	XStDeviation float64
 
 	nextPosition NextPositionFunc
-	ascii        Ascii
+	ascii        ASCII
 	reset        Reset
 }
 
 // NextPositionFunc calculates position of particle in next time step
 type NextPositionFunc func(particle *Particle, deltaMS int64)
 
-// Ascii returns the ASCII representation of the particle
-type Ascii func(row, col int, count [][]int) string
+// ASCII returns the ASCII representation of the particle
+type ASCII func(row, col int, count [][]int) string
 
 // Reset resets the particle's lifetime, speed and position
 type Reset func(particle *Particle, params *ParticleParams)

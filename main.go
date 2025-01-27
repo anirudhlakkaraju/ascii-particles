@@ -1,3 +1,4 @@
+// package main
 package main
 
 import (
@@ -43,8 +44,8 @@ var c = `               .........:--===++++======================++++===--:.....
 `
 
 var effects = map[string]particles.ASCII{
-	"steam": particles.AsciiSteam,
-	"fire":  particles.AsciiFire,
+	"steam": particles.ASCIISteam,
+	"fire":  particles.ASCIIFire,
 }
 
 func main() {
