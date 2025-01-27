@@ -84,14 +84,6 @@ func countParticles(row, col int, counts [][]int) int {
 	return count
 }
 
-func normalize(row, col int, counts [][]int) {
-
-	if countParticles(row, col, counts) > 4 {
-		counts[row][col] = 0
-	}
-
-}
-
 // NewCoffee creates a new coffee system
 func NewCoffee(width, height int, scale float64) Coffee {
 
