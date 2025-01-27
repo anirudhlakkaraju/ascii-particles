@@ -89,7 +89,7 @@ func (ps *ParticleSystem) Update() {
 }
 
 // Display returns the ascii representation of the particle system
-func (ps *ParticleSystem) Display() string {
+func (ps *ParticleSystem) Display() []string {
 	counts := make([][]int, 0)
 
 	// Initialize counts to size of particle system dimensions
@@ -125,5 +125,5 @@ func (ps *ParticleSystem) Display() string {
 		outStr = append(outStr, strings.Join(row, ""))
 	}
 
-	return strings.Join(outStr, "\n")
+	return outStr
 }
