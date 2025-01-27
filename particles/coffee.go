@@ -32,7 +32,7 @@ func ascii(row, col int, counts [][]int) string {
 // reset particle's lifetime, speed and position
 func reset(p *Particle, params *ParticleParams) {
 	p.Lifetime = int64(math.Floor(float64(params.MaxLife) * rand.Float64()))
-	p.Speed = math.Floor(params.MaxSpeed * rand.Float64())
+	p.Speed = params.MaxSpeed * rand.Float64()
 
 	// translate X coordinate on generation
 	maxX := math.Floor(float64(params.X) / 2)
