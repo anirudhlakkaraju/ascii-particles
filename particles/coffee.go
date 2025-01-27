@@ -49,15 +49,73 @@ func nextPosition(p *Particle, deltaMS int64) {
 	}
 
 	// rise particle straight up for time elapsed (in seconds)
-	p.Y += p.Speed * (float64(deltaMS) / 1000.0)
+	percent := float64(deltaMS) / 1000.0
+	p.Y += p.Speed * percent
+}
+
+var dirs = [][]int{
+	// bottom row
+	{-1, -1},
+	{-1, 0},
+	{-1, 1},
+
+	// middle row
+	{0, -1},
+	{0, 1},
+
+	// top row
+	{1, 0},
+	{1, 1},
+	{1, -1},
+}
+
+func countParticles(row, col int, counts [][]int) int {
+	count := 0
+	for _, dir := range dirs {
+		r := row + dir[0]
+		c := col + dir[1]
+
+		if r < 0 || r >= len(counts) || c < 0 || c >= len(counts[0]) {
+			continue
+		}
+		count += counts[row+dir[0]][col+dir[1]]
+	}
+	return count
+}
+
+func normalize(row, col int, counts [][]int) {
+
+	if countParticles(row, col, counts) > 4 {
+		counts[row][col] = 0
+	}
+
 }
 
 // NewCoffee creates a new coffee system
-func NewCoffee(width, height int) Coffee {
+func NewCoffee(width, height int, scale float64) Coffee {
 
 	// force odd system width to help with normal distribution
 	if width%2 == 0 {
 		width++
+	}
+
+	startTime := time.Now().UnixMilli()
+	ascii := func(row, col int, counts [][]int) string {
+		count := counts[row][col]
+		if count < 1 {
+			return " "
+		}
+
+		direction := row +
+			int(((time.Now().UnixMilli()-startTime)/2000)%2)
+
+		if countParticles(row, col, counts) > 3 {
+			if direction%2 == 0 {
+				return "{"
+			}
+			return "}"
+		}
+		return "."
 	}
 
 	return Coffee{
