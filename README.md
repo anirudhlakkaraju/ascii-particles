@@ -1,8 +1,8 @@
 # ASCII Particle System for Coffee
 
-This is a fun project that simulates a particle system for a hot cup of coffee. The particle effect can be toggled between two options: **steam** and **fire**.
+This project simulates an ASCII particle system for a hot cup of coffee. The particle effect can be toggled between two options: **steam** and **fire**.
 
-The particle densities are generated as a normal distribution to create a realistic effect.
+The particle densities are generated as a normal distribution to create a realistic effect. Project inspiration credit goes to the Primeagen!
 
 ## Features:
 - **Steam Effect**: Simulates steam rising from your hot coffee.
