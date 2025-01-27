@@ -41,7 +41,7 @@ var c = `               .........:--===++++======================++++===--:.....
 `
 
 func main() {
-	coffee := particles.NewCoffee(5, 3)
+	coffee := particles.NewCoffee(61, 8, 9.0)
 	coffee.Start()
 
 	timer := time.NewTicker(100 * time.Millisecond)
@@ -49,7 +49,10 @@ func main() {
 		<-timer.C
 		fmt.Printf("\033[H\033[2J")
 		coffee.Update()
-		fmt.Printf("%v", coffee.Display())
-
+		steam := coffee.Display()
+		for _, row := range steam {
+			fmt.Printf("              %s\n", row)
+		}
+		fmt.Println(c)
 	}
 }

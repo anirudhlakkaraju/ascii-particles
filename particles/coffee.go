@@ -4,6 +4,7 @@ package particles
 import (
 	"math"
 	"math/rand"
+	"time"
 )
 
 // Coffee is a particle system for steamin hot coffee
@@ -140,9 +141,9 @@ func NewCoffee(width, height int, scale float64) Coffee {
 	return Coffee{
 		ParticleSystem: NewParticleSystem(
 			ParticleParams{
-				MaxLife:       7,
-				MaxSpeed:      0.5,
-				ParticleCount: 100,
+				MaxLife:       6000,
+				MaxSpeed:      1.5,
+				ParticleCount: 700,
 
 				XStDeviation: scale,
 				X:            width,
@@ -150,7 +151,7 @@ func NewCoffee(width, height int, scale float64) Coffee {
 
 				reset:        reset,
 				nextPosition: nextPosition,
-				ascii:        ascii,
+				ascii:        asciiFire,
 			}),
 	}
 
