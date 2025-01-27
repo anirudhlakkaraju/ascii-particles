@@ -104,28 +104,16 @@ func countParticles(row, col int, counts [][]int) int {
 }
 
 // NewCoffee creates a new coffee system
-func NewCoffee(width, height int, scale float64, ascii ASCII) Coffee {
+func NewCoffee(params ParticleParams) Coffee {
 
 	// force odd system width to help with normal distribution
-	if width%2 == 0 {
-		width++
+	if params.X%2 == 0 {
+		params.X++
 	}
 
-	return Coffee{
-		ParticleSystem: NewParticleSystem(
-			ParticleParams{
-				MaxLife:       6000,
-				MaxSpeed:      1.5,
-				ParticleCount: 700,
+	params.reset = reset
+	params.nextPosition = nextPosition
 
-				XStDeviation: scale,
-				X:            width,
-				Y:            height,
-
-				reset:        reset,
-				nextPosition: nextPosition,
-				ascii:        ascii,
-			}),
-	}
+	return Coffee{ParticleSystem: NewParticleSystem(params)}
 
 }

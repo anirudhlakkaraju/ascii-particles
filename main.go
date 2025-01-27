@@ -58,8 +58,21 @@ func main() {
 		log.Fatalf("Invalid effect type: %s", *argType)
 	}
 
+	// Feel free to experiment!
+	params := particles.ParticleParams{
+		MaxLife:       6000,
+		MaxSpeed:      1.5,
+		ParticleCount: 700,
+
+		XStDeviation: 9.0,
+		X:            61, // width set according to the coffee cup ascii art!
+		Y:            8,
+
+		Ascii: effect,
+	}
+
 	// Pour and enjoy!
-	coffee := particles.NewCoffee(61, 8, 9.0, effect)
+	coffee := particles.NewCoffee(params)
 	coffee.Start()
 
 	timer := time.NewTicker(100 * time.Millisecond)
