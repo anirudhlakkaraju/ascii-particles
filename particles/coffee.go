@@ -36,7 +36,7 @@ func reset(p *Particle, params *ParticleParams) {
 
 	// translate X coordinate on generation
 	maxX := math.Floor(float64(params.X) / 2)
-	x := math.Max(-maxX, math.Min(rand.NormFloat64(), maxX))
+	x := math.Max(-maxX, math.Min(rand.NormFloat64()*params.XStDeviation, maxX))
 	p.X = x + maxX
 	p.Y = 0
 }
@@ -67,8 +67,9 @@ func NewCoffee(width, height int) Coffee {
 				MaxSpeed:      0.5,
 				ParticleCount: 100,
 
-				X: width,
-				Y: height,
+				XStDeviation: scale,
+				X:            width,
+				Y:            height,
 
 				reset:        reset,
 				nextPosition: nextPosition,

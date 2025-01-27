@@ -25,8 +25,9 @@ type ParticleParams struct {
 	ParticleCount int64
 
 	// dimensions of system
-	X int
-	Y int
+	X            int
+	Y            int
+	XStDeviation float64
 
 	nextPosition NextPositionFunc
 	ascii        Ascii
