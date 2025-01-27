@@ -12,22 +12,41 @@ type Coffee struct {
 	ParticleSystem
 }
 
-// ascii maps particle density in a grid cell to an ASCII character for visualization.
-func ascii(row, col int, counts [][]int) string {
+var startTime = time.Now().UnixMilli()
+
+// AsciiSteam represents particle density with steam effect
+func AsciiSteam(row, col int, counts [][]int) string {
 	count := counts[row][col]
-	if count < 3 {
+	if count < 1 {
 		return " "
 	}
+
+	direction := row + int(((time.Now().UnixMilli()-startTime)/2000)%2)
+	if countParticles(row, col, counts) > 3 {
+		if direction%2 == 0 {
+			return "{"
+		}
+		return "}"
+	}
+	return "."
+}
+
+// AsciiFire represents particle density with fire effect
+func AsciiFire(row, col int, counts [][]int) string {
+	count := counts[row][col]
+	if count == 0 {
+		return " "
+	}
+	if count < 4 {
+		return "░"
+	}
 	if count < 6 {
-		return "."
+		return "▒"
 	}
 	if count < 9 {
-		return ":"
+		return "▓"
 	}
-	if count < 12 {
-		return "{"
-	}
-	return "}"
+	return "█"
 }
 
 // reset particle's lifetime, speed and position
@@ -85,49 +104,11 @@ func countParticles(row, col int, counts [][]int) int {
 }
 
 // NewCoffee creates a new coffee system
-func NewCoffee(width, height int, scale float64) Coffee {
+func NewCoffee(width, height int, scale float64, ascii ASCII) Coffee {
 
 	// force odd system width to help with normal distribution
 	if width%2 == 0 {
 		width++
-	}
-
-	startTime := time.Now().UnixMilli()
-	ascii := func(row, col int, counts [][]int) string {
-		count := counts[row][col]
-		if count < 1 {
-			return " "
-		}
-
-		direction := row +
-			int(((time.Now().UnixMilli()-startTime)/2000)%2)
-
-		if countParticles(row, col, counts) > 3 {
-			if direction%2 == 0 {
-				return "{"
-			}
-			return "}"
-		}
-		return "."
-	}
-
-	_ = ascii
-
-	asciiFire := func(row, col int, counts [][]int) string {
-		count := counts[row][col]
-		if count == 0 {
-			return " "
-		}
-		if count < 4 {
-			return "░"
-		}
-		if count < 6 {
-			return "▒"
-		}
-		if count < 9 {
-			return "▓"
-		}
-		return "█"
 	}
 
 	return Coffee{
@@ -143,7 +124,7 @@ func NewCoffee(width, height int, scale float64) Coffee {
 
 				reset:        reset,
 				nextPosition: nextPosition,
-				ascii:        asciiFire,
+				ascii:        ascii,
 			}),
 	}
 
