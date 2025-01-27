@@ -30,7 +30,7 @@ type ParticleParams struct {
 	XStDeviation float64
 
 	nextPosition NextPositionFunc
-	ascii        ASCII
+	Ascii        ASCII
 	reset        Reset
 }
 
@@ -114,7 +114,7 @@ func (ps *ParticleSystem) Display() []string {
 	for r, row := range counts {
 		outRow := make([]string, 0)
 		for c := range row {
-			outRow = append(outRow, ps.ascii(r, c, counts))
+			outRow = append(outRow, ps.Ascii(r, c, counts))
 		}
 		out = append(out, outRow)
 	}
