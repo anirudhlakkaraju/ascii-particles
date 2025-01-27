@@ -102,8 +102,10 @@ func (ps *ParticleSystem) Display() string {
 	}
 
 	for _, p := range ps.Particles {
+		// Floor Y to prevent out of bounds
+		// Round X instead of Floor to allow particles to spread out and not clump
 		row := int(math.Floor(p.Y))
-		col := int(math.Floor(p.X))
+		col := int(math.Round(p.X))
 
 		counts[row][col]++
 	}
