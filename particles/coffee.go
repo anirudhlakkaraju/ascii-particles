@@ -118,6 +118,25 @@ func NewCoffee(width, height int, scale float64) Coffee {
 		return "."
 	}
 
+	_ = ascii
+
+	asciiFire := func(row, col int, counts [][]int) string {
+		count := counts[row][col]
+		if count == 0 {
+			return " "
+		}
+		if count < 4 {
+			return "░"
+		}
+		if count < 6 {
+			return "▒"
+		}
+		if count < 9 {
+			return "▓"
+		}
+		return "█"
+	}
+
 	return Coffee{
 		ParticleSystem: NewParticleSystem(
 			ParticleParams{
