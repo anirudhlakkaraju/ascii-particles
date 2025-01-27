@@ -11,7 +11,7 @@ type Coffee struct {
 	ParticleSystem
 }
 
-// ascii returns the ASCII representation of the particle
+// ascii maps particle density in a grid cell to an ASCII character for visualization.
 func ascii(row, col int, counts [][]int) string {
 	count := counts[row][col]
 	if count < 3 {
