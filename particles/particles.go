@@ -82,7 +82,7 @@ func (ps *ParticleSystem) Update() {
 	for _, p := range ps.Particles {
 		ps.nextPosition(p, delta)
 
-		if p.Y >= float64(ps.Y) || p.X >= float64(ps.X) {
+		if p.Y >= float64(ps.Y) || p.X >= float64(ps.X) || p.Lifetime <= 0 {
 			ps.reset(p, &ps.ParticleParams)
 		}
 	}
