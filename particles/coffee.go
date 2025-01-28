@@ -14,39 +14,38 @@ type Coffee struct {
 
 var startTime = time.Now().UnixMilli()
 
-// ASCIISteam represents particle density with steam effect
-func ASCIISteam(row, col int, counts [][]int) string {
+// ascii represents particle density with steam effect
+func ascii(row, col int, counts [][]int, asset *ParticleEffect) string {
 	count := counts[row][col]
-	if count < 1 {
-		return " "
-	}
+	surroundCount := countParticlesAround(row, col, counts)
 
-	direction := row + int(((time.Now().UnixMilli()-startTime)/2000)%2)
-	if countParticles(row, col, counts) > 3 {
+	var value interface{}
+	switch {
+	case count < 1:
+		value = asset.None
+	case surroundCount > 5:
+		// alternate between high and max asset
+		direction := row + int(((time.Now().UnixMilli()-startTime)/2000)%2)
 		if direction%2 == 0 {
-			return "{"
+			value = asset.High
+		} else {
+			value = asset.Max
 		}
-		return "}"
+	case surroundCount > 4:
+		value = asset.Medium
+	default:
+		value = asset.Low
 	}
-	return "."
-}
 
-// ASCIIFire represents particle density with fire effect
-func ASCIIFire(row, col int, counts [][]int) string {
-	count := counts[row][col]
-	if count == 0 {
-		return " "
+	// handle particle asset types
+	switch v := value.(type) {
+	case rune:
+		return string(v)
+	case string:
+		return v
+	default:
+		return string(asset.None)
 	}
-	if count < 4 {
-		return "░"
-	}
-	if count < 6 {
-		return "▒"
-	}
-	if count < 9 {
-		return "▓"
-	}
-	return "█"
 }
 
 // reset particle's lifetime, speed and position
@@ -73,6 +72,7 @@ func nextPosition(p *Particle, deltaMS int64) {
 	p.Y += p.Speed * percent
 }
 
+// dirs represents the 8 directions around a particle
 var dirs = [][]int{
 	// bottom row
 	{-1, -1},
@@ -89,7 +89,8 @@ var dirs = [][]int{
 	{1, -1},
 }
 
-func countParticles(row, col int, counts [][]int) int {
+// countParticlesAround counts the number of particles around a given particle
+func countParticlesAround(row, col int, counts [][]int) int {
 	count := 0
 	for _, dir := range dirs {
 		r := row + dir[0]
@@ -113,6 +114,7 @@ func NewCoffee(params ParticleParams) Coffee {
 
 	params.reset = reset
 	params.nextPosition = nextPosition
+	params.Ascii = ascii
 
 	return Coffee{ParticleSystem: NewParticleSystem(params)}
 
