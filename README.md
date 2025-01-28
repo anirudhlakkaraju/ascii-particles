@@ -5,7 +5,7 @@ This project simulates an ASCII particle system for a hot cup of coffee.
 The particle densities are generated as a normal distribution to create a realistic effect. Project inspiration credit goes to the Primeagen!
 
 
-![Coffee Particle Effect](https://github.com/user-attachments/assets/ce0603f5-b3b2-47bb-a488-f5fac722d922)
+https://github.com/user-attachments/assets/ce0603f5-b3b2-47bb-a488-f5fac722d922
 
 ## Features:
 - **Effect Selection**: Choose from a variety of pre-defined particle effects, accessible by specifying the `--list` argument.
