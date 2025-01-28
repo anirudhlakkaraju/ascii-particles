@@ -11,13 +11,13 @@ import (
 
 // ParseArgs handles flag parsing and returns the appropriate action.
 func ParseArgs() (*string, *string, *bool) {
-	argType := flag.String("effect", particles.DefaultEffect.Name, "Specify the type of particle effect (--list to see all effects)")
+	argEffect := flag.String("effect", particles.DefaultEffect.Name, "Specify the type of particle effect (--list to see all effects)")
 	argAdd := flag.String("add", "", "Add new particle effect assets in the format: {name:assets} (e.g., 'steam:.:{}')")
 	argList := flag.Bool("list", false, "List all available particle effects")
 
 	flag.Parse()
 
-	return argType, argAdd, argList
+	return argEffect, argAdd, argList
 }
 
 // HandleList displays all available particle effects

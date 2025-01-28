@@ -48,7 +48,7 @@ func main() {
 	particles.LoadEffects()
 
 	// Parse the command-line arguments
-	argType, argAdd, argList := args.ParseArgs()
+	argEffect, argAdd, argList := args.ParseArgs()
 
 	// Handle --list flag
 	if *argList {
@@ -63,9 +63,9 @@ func main() {
 	}
 
 	// Determine the effect type
-	effect, ok := particles.Effects[*argType]
+	effect, ok := particles.Effects[*argEffect]
 	if !ok {
-		log.Fatalf("Invalid effect type: %s", *argType)
+		log.Fatalf("Invalid effect type: %s", *argEffect)
 	}
 
 	// Feel free to experiment!
