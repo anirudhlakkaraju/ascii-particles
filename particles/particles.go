@@ -29,6 +29,9 @@ type ParticleParams struct {
 	Y            int
 	XStDeviation float64
 
+	// Assets for the particle system
+	ParticleEffect *ParticleEffect
+
 	nextPosition NextPositionFunc
 	Ascii        ASCII
 	reset        Reset
@@ -38,7 +41,7 @@ type ParticleParams struct {
 type NextPositionFunc func(particle *Particle, deltaMS int64)
 
 // ASCII returns the ASCII representation of the particle
-type ASCII func(row, col int, count [][]int) string
+type ASCII func(row, col int, count [][]int, asset *ParticleEffect) string
 
 // Reset resets the particle's lifetime, speed and position
 type Reset func(particle *Particle, params *ParticleParams)
@@ -114,7 +117,7 @@ func (ps *ParticleSystem) Display() []string {
 	for r, row := range counts {
 		outRow := make([]string, 0)
 		for c := range row {
-			outRow = append(outRow, ps.Ascii(r, c, counts))
+			outRow = append(outRow, ps.Ascii(r, c, counts, ps.ParticleEffect))
 		}
 		out = append(out, outRow)
 	}
