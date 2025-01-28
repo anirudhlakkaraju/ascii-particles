@@ -52,3 +52,31 @@ func NewParticleEffect(effect Effect) *ParticleEffect {
 	}
 }
 
+// LoadEffects loads particle effects from a JSON file
+func LoadEffects() {
+	data, err := os.ReadFile(EffectsFile)
+	if os.IsNotExist(err) {
+		// Create the default file if it doesn't exist
+		Effects[DefaultEffect.Name] = DefaultEffect
+		SaveEffects()
+		return
+	} else if err != nil {
+		log.Fatalf("Error reading effects file: %v", err)
+	}
+
+	if err := json.Unmarshal(data, &Effects); err != nil {
+		log.Fatalf("Error parsing effects file: %v", err)
+	}
+}
+
+// SaveEffects writes the current effects map to the JSON file
+func SaveEffects() {
+	data, err := json.MarshalIndent(Effects, "", "  ")
+	if err != nil {
+		log.Fatalf("Error serializing effects: %v", err)
+	}
+
+	if err := os.WriteFile(EffectsFile, data, 0644); err != nil {
+		log.Fatalf("Error writing effects file: %v", err)
+	}
+}
