@@ -2,9 +2,9 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
+	"particles/args"
 	"particles/particles"
 	"time"
 )
@@ -43,32 +43,42 @@ var c = `               .........:--===++++======================++++===--:.....
 
 `
 
-var effects = map[string]particles.ASCII{
-	"steam": particles.ASCIISteam,
-	"fire":  particles.ASCIIFire,
-}
-
 func main() {
 
-	argType := flag.String("effect", "steam", "Specify the particle effect: 'steam' or 'fire'")
-	flag.Parse()
+	particles.LoadEffects()
 
-	effect, ok := effects[*argType]
+	// Parse the command-line arguments
+	argType, argAdd, argList := args.ParseArgs()
+
+	// Handle --list flag
+	if *argList {
+		args.HandleList()
+		return
+	}
+
+	// Handle --add flag
+	if *argAdd != "" {
+		args.HandleAdd(*argAdd)
+		return
+	}
+
+	// Determine the effect type
+	effect, ok := particles.Effects[*argType]
 	if !ok {
 		log.Fatalf("Invalid effect type: %s", *argType)
 	}
 
 	// Feel free to experiment!
 	params := particles.ParticleParams{
-		MaxLife:       6000,
+		MaxLife:       7000,
 		MaxSpeed:      1.5,
 		ParticleCount: 700,
 
 		XStDeviation: 9.0,
 		X:            61, // width set according to the coffee cup ascii art!
-		Y:            8,
+		Y:            9,
 
-		Ascii: effect,
+		ParticleEffect: particles.NewParticleEffect(*effect),
 	}
 
 	// Pour and enjoy!
