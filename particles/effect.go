@@ -54,6 +54,11 @@ func NewParticleEffect(effect Effect) *ParticleEffect {
 
 // LoadEffects loads particle effects from a JSON file
 func LoadEffects() {
+	// Ensure the Effects map is initialized
+	if Effects == nil {
+		Effects = make(map[string]*Effect)
+	}
+
 	data, err := os.ReadFile(EffectsFile)
 	if os.IsNotExist(err) {
 		// Create the default file if it doesn't exist
