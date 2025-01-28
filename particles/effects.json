@@ -1,0 +1,30 @@
+{
+  "type1": {
+    "name": "type1",
+    "asset": ".:{}"
+  },
+  "type2": {
+    "name": "type2",
+    "asset": "⎜⎟⎠⎝"
+  },
+  "type3": {
+    "name": "type3",
+    "asset": "░▒▓█"
+  },
+  "type4": {
+    "name": "type4",
+    "asset": "▁▂▃▄"
+  },
+  "type5": {
+    "name": "type5",
+    "asset": "▖▗▘▙"
+  },
+  "type6": {
+    "name": "type6",
+    "asset": "▚▛▜▝"
+  },
+  "type7": {
+    "name": "type7",
+    "asset": ".oO0"
+  }
+}
