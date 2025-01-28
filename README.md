@@ -4,6 +4,10 @@ This project simulates an ASCII particle system for a hot cup of coffee. The par
 
 The particle densities are generated as a normal distribution to create a realistic effect. Project inspiration credit goes to the Primeagen!
 
+
+https://github.com/user-attachments/assets/ce0603f5-b3b2-47bb-a488-f5fac722d922
+
+
 ## Features:
 - **Steam Effect**: Simulates steam rising from your hot coffee.
 - **Fire Effect**: Simulates a more intense, fiery particle effect.
